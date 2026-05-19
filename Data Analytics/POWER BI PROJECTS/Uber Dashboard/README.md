@@ -9,7 +9,7 @@ An interactive **Power BI dashboard** built to analyze ride-hailing performance 
 
 ## Project Overview
 
-This dashboard was created as a Power BI practice project to explore how a ride-sharing business can be monitored through a single, easy-to-use report. It provides a clear view of:
+This dashboard was created as a Power BI project to explore how a ride-sharing business can be monitored through a single, easy-to-use report. It provides a clear view of:
 
 - total completed rides and booking status,
 - revenue by vehicle type and time period,
