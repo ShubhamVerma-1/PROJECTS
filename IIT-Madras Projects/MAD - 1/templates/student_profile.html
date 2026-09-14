@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div>
+  <h2>Welcome, {{ user.name }}!</h2><hr>
+</div>
+<h3 class="mt-5">Available Placement Drives</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Drive</th>
+      <th>Job Title</th>
+      <th>Location</th>
+      <th>Deadline</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for drive in drives %}
+    <tr>
+      <td>{{ drive.company.user_account.name }}</td>
+      <td>{{ drive.drive_name }}</td>
+      <td>{{ drive.job_title }}</td>
+      <td>{{ drive.location }}</td>
+      <td>{{ drive.deadline }}</td>
+      <td class="d-flex gap-1">
+        <a href="{{ url_for('drive_detail', drive_id=drive.drive_id) }}" class="btn btn-outline-primary btn-sm">
+          Details
+        </a>
+        {% if drive.drive_id in applied_drive_ids %}
+          <button class="btn btn-secondary btn-sm" disabled>Applied</button>
+        {% else %}
+          <a href="{{ url_for('apply_drive', drive_id=drive.drive_id) }}" class="btn btn-primary btn-sm">
+            Apply
+          </a>
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="6" class="text-center text-muted">No drives available right now.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3 class="mt-5">My Applications</h3>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Drive</th>
+      <th>Company</th>
+      <th>Status</th>
+      <th>Date Applied</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for app in applications %}
+    <tr>
+      <td>{{ app.drive.drive_name }}</td>
+      <td>{{ app.drive.company.user_account.name }}</td>
+      <td>{{ app.status }}</td>
+      <td>{{ app.application_date.strftime('%d/%m/%Y') }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4" class="text-center text-muted">No applications yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
