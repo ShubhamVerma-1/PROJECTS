@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}Applicants{% endblock %}
+
+{% block content %}
+
+<h3>Applicants for {{ drive.drive_name }}</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Qualification</th>
+            <th>Resume</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for app in applications %}
+        <tr>
+
+            <td>{{ app.student.user_account.name }}</td>
+            <td>{{ app.student.qualification }}</td>
+
+            <td>
+                <a href="{{ app.student.resume_link }}" target="_blank">
+                    View Resume
+                </a>
+            </td>
+
+            <td>{{ app.status }}</td>
+
+            <td>
+                <a href="{{ url_for('update_application_status', app_id=app.id, status='Shortlisted') }}"
+                   class="btn btn-success btn-sm">Shortlist</a>
+
+                <a href="{{ url_for('update_application_status', app_id=app.id, status='Selected') }}"
+                   class="btn btn-primary btn-sm">Select</a>
+
+                <a href="{{ url_for('update_application_status', app_id=app.id, status='Rejected') }}"
+                   class="btn btn-danger btn-sm">Reject</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

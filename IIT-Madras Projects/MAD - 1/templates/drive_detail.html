@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ drive.drive_name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4" style="max-width: 700px;">
+
+    <a href="{{ url_for('student_profile') }}" class="btn btn-outline-secondary btn-sm mb-3">← Back to Dashboard</a>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h4 class="mb-0">{{ drive.drive_name }}</h4>
+            <small>{{ drive.company.user_account.name }}</small>
+        </div>
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <p><strong>Job Title:</strong> {{ drive.job_title }}</p>
+                    <p><strong>Location:</strong> {{ drive.location or '—' }}</p>
+                    <p><strong>Salary / Stipend:</strong> {{ drive.salary or '—' }}</p>
+                </div>
+                <div class="col-sm-6">
+                    <p><strong>Application Deadline:</strong> {{ drive.deadline }}</p>
+                    <p><strong>Status:</strong>
+                        <span class="badge bg-success">{{ drive.status }}</span>
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>Job Description</h5>
+            <p>{{ drive.job_description }}</p>
+
+            <hr>
+
+            <h5>Eligibility Criteria</h5>
+            <p>{{ drive.eligibility or 'No specific criteria mentioned.' }}</p>
+
+        </div>
+        <div class="card-footer">
+            {% if already_applied %}
+                <button class="btn btn-secondary" disabled>Already Applied</button>
+            {% elif drive.deadline < today %}
+                <button class="btn btn-warning" disabled>Deadline Passed</button>
+            {% else %}
+                <a href="{{ url_for('apply_drive', drive_id=drive.drive_id) }}" class="btn btn-primary">
+                    Apply Now
+                </a>
+            {% endif %}
+            <a href="{{ url_for('student_profile') }}" class="btn btn-outline-secondary ms-2">Back</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

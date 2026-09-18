@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Drive{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column align-items-center justify-content-center mt-5 mb-5">
+    <div class="border p-5 rounded" style="width: 500px;">
+        <h3 class="mb-4 text-center">Create Placement Drive</h3>
+        
+        <form action="" method="post">
+            <div class="mb-3">
+                <label for="drive_name" class="form-label">Drive Name (e.g., Summer 2026 Recruitment)</label>
+                <input type="text" id="drive_name" name="drive_name" class="form-control" value="{{ drive.drive_name if drive else '' }}" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="job_title" class="form-label">Job/Internship Title</label>
+                <input type="text" id="job_title" name="job_title" class="form-control" value="{{ drive.job_title if drive else '' }}" required />
+            </div>
+
+            <div class="mb-3">
+                <label for="job_description" class="form-label">Job Description</label>
+                <textarea id="job_description" name="job_description" class="form-control" rows="3" required>{{ drive.job_description if drive else '' }}</textarea>
+            </div>
+
+                <div class="mb-3">
+                    <label for="salary" class="form-label">Salary/Stipend</label>
+                    <input type="text" id="salary" name="salary" class="form-control" value="{{ drive.salary if drive else '' }}" />
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" id="location" name="location" class="form-control" value="{{ drive.location if drive else '' }}" />
+                </div>
+
+            <div class="mb-3">
+                <label for="eligibility" class="form-label">Eligibility Criteria</label>
+                <textarea id="eligibility" name="eligibility" class="form-control" rows="2" placeholder="e.g., Minimum 7.5 CGPA, B.Tech CSE only">{{ drive.eligibility if drive else '' }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="deadline" class="form-label">Application Deadline</label>
+                <input type="date" id="deadline" name="deadline" class="form-control" value="{{ drive.deadline if drive else '' }}" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-2">Submit for Approval</button>
+            <a href="{{ url_for('company_profile') }}" class="btn btn-outline-secondary w-100 text-center d-block">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
