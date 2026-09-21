@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+
+<h3>Registered Students</h3>
+
+<form action="{{ url_for('search_students') }}" method="get" class="d-flex gap-2 mb-3" style="max-width: 400px;">
+  <input type="text" name="q" class="form-control" placeholder="Search by name..." value="{{ request.args.get('q', '') }}" />
+  <button type="submit" class="btn btn-primary">Search</button>
+  {% if request.args.get('q') %}
+    <a href="{{ url_for('admin_students') }}" class="btn btn-outline-secondary">Clear</a>
+  {% endif %}
+</form>
+
+{% if request.args.get('q') %}
+  <p class="text-muted">Showing results for: <strong>{{ request.args.get('q') }}</strong></p>
+{% endif %}
+
+<table class="table table-bordered">
+<tr>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Qualification</th>
+  <th>Resume</th>
+  <th>Status</th>
+  <th>Action</th>
+</tr>
+
+{% for student in students %}
+<tr>
+  <td>{{ student.user_account.name }}</td>
+  <td>{{ student.user_account.email }}</td>
+  <td>{{ student.qualification }}</td>
+  <td>
+    <a href="{{ student.resume_link }}" target="_blank">View Resume</a>
+  </td>
+  <td>
+    {% if student.user_account.is_active %}
+      <span class="badge bg-success">Active</span>
+    {% else %}
+      <span class="badge bg-secondary">Deactivated</span>
+    {% endif %}
+  </td>
+  <td>
+    {% if student.user_account.is_active %}
+      <a href="{{ url_for('blacklist_user', user_id=student.user_account.id) }}"
+         class="btn btn-danger btn-sm">
+        Blacklist
+      </a>
+    {% else %}
+      <a href="{{ url_for('reactivate_user', user_id=student.user_account.id) }}"
+         class="btn btn-success btn-sm">
+        Reactivate
+      </a>
+    {% endif %}
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td colspan="6" class="text-center text-muted">No students found.</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

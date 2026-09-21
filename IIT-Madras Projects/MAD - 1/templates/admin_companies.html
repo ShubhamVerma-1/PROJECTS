@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}Companies{% endblock %}
+
+{% block content %}
+
+<h3>Registered Companies</h3>
+
+<form action="{{ url_for('search_companies') }}" method="get" class="d-flex gap-2 mb-3" style="max-width: 400px;">
+  <input type="text" name="q" class="form-control" placeholder="Search by name..." value="{{ request.args.get('q', '') }}" />
+  <button type="submit" class="btn btn-primary">Search</button>
+  {% if request.args.get('q') %}
+    <a href="{{ url_for('admin_companies') }}" class="btn btn-outline-secondary">Clear</a>
+  {% endif %}
+</form>
+
+{% if request.args.get('q') %}
+  <p class="text-muted">Showing results for: <strong>{{ request.args.get('q') }}</strong></p>
+{% endif %}
+
+<table class="table table-bordered">
+<tr>
+  <th>Name</th>
+  <th>Website</th>
+  <th>Status</th>
+  <th>Action</th>
+</tr>
+
+{% for company in companies %}
+<tr>
+  <td>{{ company.user_account.name }}</td>
+  <td>{{ company.company_website }}</td>
+  <td>{{ company.approval_status }}</td>
+  <td>
+    <a href="{{ url_for('approve_company', id=company.company_id) }}" class="btn btn-success btn-sm">Approve</a>
+    <a href="{{ url_for('reject_company', id=company.company_id) }}" class="btn btn-danger btn-sm">Reject</a>
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td colspan="4" class="text-center text-muted">No companies found.</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}
