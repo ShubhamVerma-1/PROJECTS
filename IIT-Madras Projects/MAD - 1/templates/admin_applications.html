@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Applications{% endblock %}
+
+{% block content %}
+
+<h3>Student Applications</h3>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Student</th>
+<th>Drive</th>
+<th>Company</th>
+<th>Status</th>
+<th>Date</th>
+</tr>
+
+{% for app in applications %}
+
+<tr>
+
+<td>{{ app.student.user_account.name }}</td>
+
+<td>{{ app.drive.drive_name }}</td>
+
+<td>{{ app.drive.company.user_account.name }}</td>
+
+<td>{{ app.status }}</td>
+
+<td>{{ app.application_date.strftime('%d/%m/%Y') }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

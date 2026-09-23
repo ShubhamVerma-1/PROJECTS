@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Placement Drives{% endblock %}
+
+{% block content %}
+
+<h3>Placement Drives</h3>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Drive Name</th>
+<th>Company</th>
+<th>Job Title</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for drive in drives %}
+
+<tr>
+
+<td>{{ drive.drive_name }}</td>
+<td>{{ drive.company.user_account.name }}</td>
+<td>{{ drive.job_title }}</td>
+<td>{{ drive.status }}</td>
+
+<td>
+
+<a href="{{ url_for('approve_drive', id=drive.drive_id) }}"
+class="btn btn-success btn-sm">Approve</a>
+
+<a href="{{ url_for('reject_drive', id=drive.drive_id) }}"
+class="btn btn-danger btn-sm">Reject</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
