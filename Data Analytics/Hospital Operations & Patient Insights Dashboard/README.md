@@ -39,9 +39,6 @@ Department-Wise Patient Insights: In-depth metrics about patient management acro
 **Home Page**
 ![Home Page](ScreenShot/Home%20Page.png)
 
-**Patients Insights**
-![Patients Insights](ScreenShot/Patients%20Insights.png)
-
 **Hospital Insights**
 ![Hospital Insight](ScreenShot/Hospital%20Insight.png)
 
