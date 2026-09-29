@@ -34,18 +34,14 @@ Billing vs Insurance: Line graph comparing billing and insurance claims across s
 Date Filter Panel: User can dynamically change the report view using Admit/Discharge/Follow-up date filters.
 Department-Wise Patient Insights: In-depth metrics about patient management across various departments.
 
+## Screenshots
 
-<img
-     #Home Page 
-     ---
-   ![Home Page](https://github.com/user-attachments/assets/ee356dc7-f0e9-40be-87fb-ad24ebc44ea5)
-      ---
-      #Patients Insights
-   ![Patients Insights](https://github.com/user-attachments/assets/efd2ef73-3d20-4165-9d41-5681d775cafb)
-    ---
-     #Hospital Insights
-  ![Hospital Insight](https://github.com/user-attachments/assets/e13806f9-ce98-4d3e-ab12-a31e23ae28db)
----
-  
+**Home Page**
+![Home Page](ScreenShot/home%20page.png)
 
-img>
+**Patients Insights**
+![Patients Insights](ScreenShot/patients%20insights.png)
+
+**Hospital Insights**
+![Hospital Insights](ScreenShot/hospital%20insights.png)
+
